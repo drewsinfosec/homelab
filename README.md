@@ -34,3 +34,7 @@ Welcome to my cybersecurity homelab. This environment is built to practice real-
 - Prepare for CompTIA Security+
 - Simulate real-world attack scenarios
 - Document learning for professional growth
+
+## Setup Log
+
+Initialized GitHub repo and connected from command machine.
