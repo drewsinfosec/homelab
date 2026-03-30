@@ -1,5 +1,5 @@
 # homelab
-# 🖥️ D's Cybersecurity Homelab
+# 🖥️ Cybersecurity Homelab
 
 Welcome to my cybersecurity homelab. This environment is built to practice real-world offensive and defensive security techniques.
 
