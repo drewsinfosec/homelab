@@ -19,7 +19,7 @@ nmap -p 445 192.168.0.184
 smbclient -L //192.168.0.184 -U scout
 
 🔐 Access
-sudo mount -t cifs //192.168.0.184/scoutShare /mnt \
+sudo mount -t cifs //192.168.0.184/*****Share /mnt \
 -o username=*****,password=*******
 
 ✅ Results
