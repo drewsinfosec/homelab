@@ -38,3 +38,8 @@ Welcome to my cybersecurity homelab. This environment is built to practice real-
 ## Setup Log
 
 Initialized GitHub repo and connected from command machine.
+
+## SSH Setup
+Successfully configured SSH authentication with Github
+
+![SSH Success}(screenshots/ssh-auth-sucess.png
