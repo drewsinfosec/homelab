@@ -42,4 +42,4 @@ Initialized GitHub repo and connected from command machine.
 ## SSH Setup
 Successfully configured SSH authentication with Github
 
-![SSH Success}(screenshots/ssh-auth-sucess.png
+![SSH Success}(screenshots/ssh_auth_sucess.png)
