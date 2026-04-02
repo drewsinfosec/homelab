@@ -1,9 +1,9 @@
 # homelab
-# 🖥️ Cybersecurity Homelab
+# Cybersecurity Homelab
 
 Welcome to my cybersecurity homelab. This environment is built to practice real-world offensive and defensive security techniques.
 
-## 🔧 Lab Environment
+# Lab Environment
 
 - **Host:** Proxmox VE (Dell Precision 5820 - "Hank")
 - **VMs:**
@@ -16,30 +16,34 @@ Welcome to my cybersecurity homelab. This environment is built to practice real-
   - Router: TP-Link AC1750
   - Switch: Netgear 24-port
 
-## 🧪 Labs Completed
+# Labs Completed
 
-### 1. SMB Enumeration & Access
+# 1. SMB Enumeration & Access
 - Used `nmap` to identify open ports (445)
 - Enumerated shares using `smbclient`
 - Mounted SMB share to Kali
 - Tested write permissions
 
-📄 [View Lab](./labs/smb-enumeration.md)
+[View Lab](./labs/smb-enumeration.md)
 
 ---
 
-## 🎯 Goals
+# Goals
 
 - Build hands-on cybersecurity skills
 - Prepare for CompTIA Security+
 - Simulate real-world attack scenarios
 - Document learning for professional growth
 
-## Setup Log
+# Setup Log
 
 Initialized GitHub repo and connected from command machine.
 
-## SSH Setup
+# SSH Setup
 Successfully configured SSH authentication with Github
 
 ![SSH Success](screenshots/ssh_auth_success.png)
+
+# Labs
+
+- [Grep Lab – Credential Hunting](linux/grep-lab/grep-lab.md)
