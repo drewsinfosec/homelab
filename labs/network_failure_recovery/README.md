@@ -199,7 +199,11 @@ Add screenshots here:
 ![Fixed IP](screenshots/fixed_ip.png)
 ```
 
----
+---<img width="800" height="601" alt="Screenshot_2026-04-03_11-23-42" src="https://github.com/user-attachments/assets/5c5c9d9c-1256-4b43-8ece-43fb1ee9bc67" />
+<img width="869" height="368" alt="Screenshot_2026-04-03_11-19-11" src="https://github.com/user-attachments/assets/8b5ac52f-2f0a-44da-b3e0-c58cf7a9f277" />
+<img width="923" height="315" alt="Screenshot_2026-04-03_08-50-55" src="https://github.com/user-attachments/assets/a879eb97-c70a-427c-ba1c-62bb3288144b" />
+<img width="827" height="613" alt="Screenshot_2026-04-03_08-30-35" src="https://github.com/user-attachments/assets/a42a873f-6ee8-4975-8685-0d9a3c606e00" />
+
 
 ## Reflection
 
