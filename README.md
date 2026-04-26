@@ -9,7 +9,8 @@ Welcome to my cybersecurity homelab. This environment is built to practice real-
 - **VMs:**
   - Kali Linux (Attacker)
   - Windows 11 (Target)
-  - Debian (Pi-hole DNS)
+  - Debian 12 (Pi-hole DNS)
+  - Debian 12 (cowrie-honeypot)
 
 - **Network:**
   - Internal LAN: 192.168.0.0/24
@@ -32,6 +33,4 @@ Successfully configured SSH authentication with Github
 
 ![SSH Success](screenshots/ssh_auth_success.png)
 
-# Labs
 
-- [Grep Lab – Credential Hunting](linux/grep-lab/grep-lab.md)
