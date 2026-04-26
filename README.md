@@ -33,13 +33,13 @@ Successfully configured SSH authentication with Github
 
 ![SSH Success](screenshots/ssh_auth_success.png)
 
-## Labs
+# Labs
 
-### 🛡️ Defensive / Networking
+# Defensive / Networking
 - [Network Failure Recovery](labs/network-failure-recovery/)
 - [Zero Trust Lab](labs/zero-trust/)
 
-### 💥 Offensive / Exploitation
+# Offensive / Exploitation
 - [Metasploitable2 Deployment](labs/metasploitable2-deployment/)
 - [Netcat Reverse Shell](labs/netcat-reverse-shell/)
 - [SMB Enumeration](labs/smb-enumeration/)
