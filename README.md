@@ -16,18 +16,6 @@ Welcome to my cybersecurity homelab. This environment is built to practice real-
   - Router: TP-Link AC1750
   - Switch: Netgear 24-port
 
-# Labs Completed
-
-# 1. SMB Enumeration & Access
-- Used `nmap` to identify open ports (445)
-- Enumerated shares using `smbclient`
-- Mounted SMB share to Kali
-- Tested write permissions
-
-[View Lab](./labs/smb-enumeration.md)
-
----
-
 # Goals
 
 - Build hands-on cybersecurity skills
