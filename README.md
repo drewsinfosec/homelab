@@ -11,6 +11,7 @@ Welcome to my cybersecurity homelab. This environment is built to practice real-
   - Windows 11 (Target)
   - Debian 12 (Pi-hole DNS)
   - Debian 12 (cowrie-honeypot)
+  - Metasplotable2
 
 - **Network:**
   - Internal LAN: 192.168.0.0/24
