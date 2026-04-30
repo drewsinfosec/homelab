@@ -1,7 +1,7 @@
 # homelab
 # Cybersecurity Homelab
 
-Welcome to my cybersecurity homelab. This environment is built to practice real-world offensive and defensive security techniques. High school CS teacher working toward transitioning into cybersecurity.
+Welcome to my cybersecurity homelab. This environment is built to practice real-world offensive and defensive security techniques. I am a feral GenX raccoon with Wi-Fi and a High school CS teacher working toward transitioning into cybersecurity.
 
 # Lab Environment
 
