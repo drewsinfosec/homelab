@@ -1,0 +1,48 @@
+# Pi-hole Change Management Lab - NTP/DNS Fix
+
+## Date
+May 2, 2026
+
+## Change Title
+Resolve Pi-hole NTP DNS resolution error
+
+## Change Type
+Normal change
+
+## System Owner
+Drew
+
+## Affected System
+Pi-hole VM
+
+## Reason for Change
+Pi-hole reports an NTP error: Cannot resolve NTP server address.
+
+## Risk Level
+Low to Moderate
+
+## Stakeholders
+- Homelab administrator
+- Devices using Pi-hole for DNS
+- Any lab VMs depending on Pi-hole
+
+## Impact Analysis
+If DNS is misconfigured, clients may lose name resolution.
+If NTP fails, logs may show incorrect timestamps.
+Incorrect timestamps can make security analysis unreliable.
+
+## Maintenance Window
+Afternoon lab session, May 2, 2026
+
+## Backout Plan
+Revert Proxmox snapshot if the change breaks DNS or Pi-hole.
+Restore previous DNS configuration files if edited.
+
+## Success Criteria
+- Pi-hole resolves DNS names.
+- Pi-hole no longer shows the NTP resolution error.
+- System time sync works.
+- Client VM can resolve external domains through Pi-hole.
+
+## Test Results
+To be filled in after testing.
