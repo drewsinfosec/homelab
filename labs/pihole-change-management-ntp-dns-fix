@@ -45,4 +45,15 @@ Restore previous DNS configuration files if edited.
 - Client VM can resolve external domains through Pi-hole.
 
 ## Test Results
-To be filled in after testing.
+
+##SSH Access Correction
+-During the Pi-hole change management lab, SSH was installed and confirmed running. 
+-Initial login attempts using `root` and `pihole` failed or were not ideal.
+-The `pihole` account was treated as an application/service account, not the preferred daily administrative login. 
+-A new named administrative user, `drew`, was created for SSH access.
+
+This follows better security practice because:
+- root SSH login is avoided.
+- A named user improves accountability.
+- Administrative tasks can be performed with `sudo`.
+- The Pi-hole service account is not used as the daily login account.
