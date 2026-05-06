@@ -1,0 +1,75 @@
+# Change Management Log: Linux Kernel / System Update
+
+## Change Title
+Update Linux system packages and kernel on `ginger`
+
+## Date
+YYYY-MM-DD
+
+## System
+| Item | Details |
+|---|---|
+| Hostname | ginger |
+| OS | Kali Linux |
+| Role | Lab / attacker VM |
+| Environment | Homelab |
+| Change Type | Standard maintenance / security update |
+
+---
+
+## Reason for Change
+
+A Linux kernel vulnerability was reported that may allow local privilege escalation.  
+This system will be updated first as a test before updating other systems in the homelab.
+
+Primary goal:
+
+- Apply available security and kernel updates
+- Confirm the system still boots correctly
+- Confirm tools and networking still work after reboot
+- Use this as a test before updating other machines
+
+---
+
+## Risk Level
+
+**Risk:** Low to Medium
+
+### Possible Risks
+
+- System may fail to boot after kernel update
+- Network settings could change
+- Tools may break after package updates
+- VM may need a snapshot restore
+- Update may take longer than expected
+
+### Why This System First?
+
+`ginger` is a good test system because it is not the main Proxmox host, DNS server, or honeypot. If something breaks, it does not take down the whole lab.
+
+---
+
+## Pre-Change Checklist
+
+Before making changes:
+
+- [ ] Confirm VM is running normally
+- [ ] Take a Proxmox snapshot
+- [ ] Record current kernel version
+- [ ] Record current IP address
+- [ ] Confirm internet access
+- [ ] Confirm SSH access, if used
+- [ ] Note any important running services
+
+---
+
+## Pre-Change Commands
+
+```bash
+hostname
+uname -r
+ip -br addr
+ip route
+ping -c 4 1.1.1.1
+ping -c 4 google.com
+df -h
