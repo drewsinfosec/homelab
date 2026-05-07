@@ -1,0 +1,14 @@
+## Wireless Adapter Monitor Mode Test
+
+System: goblinwrangler  
+USB Wi-Fi Adapter: Ralink RT5370  
+Driver: rt2800usb  
+Original Interface: wlx000ca1102f17  
+Monitor Interface: wlan0mon  
+
+Result: Success
+
+Evidence:
+- `airmon-ng start wlx000ca1102f17` created `wlan0mon`
+- `iw dev` showed `wlan0mon` with `type monitor`
+- Internal Wi-Fi `wlp3s0` remained in managed mode
