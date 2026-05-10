@@ -1,0 +1,19 @@
+## Installing powershell in Linux Mint
+
+# Updated package list and installed prerequisites
+sudo apt update && sudo apt install -y wget apt-transport-https software-properties-common
+
+# Downloaded the Microsoft repository GPG keys
+wget -q https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb
+
+# Registered the Microsoft repos GPG keys
+sudo dpkg -i packages-microsoft-prod.deb
+
+# Update the list of packages after adding the repo
+sudo apt update
+
+# Install PowerShell
+sudo apt install -y powershell
+
+# To start PowerShell in the terminal
+pwsh
