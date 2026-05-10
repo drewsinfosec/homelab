@@ -15,5 +15,8 @@ sudo apt update
 # Install PowerShell
 sudo apt install -y powershell
 
+# Remove installation files
+rm packages-microsoft-prod.deb
+
 # To start PowerShell in the terminal
 pwsh
