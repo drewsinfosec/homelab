@@ -1,0 +1,53 @@
+# Tailscale File Transfer Lab - Phone to Ginger
+
+Date: 2026-05-10  
+Lab Type: Remote Access / File Transfer / Tailscale  
+Status: Successful  
+
+## Overview
+
+In this lab, I tested transferring a file from my phone to my Kali Linux VM named 'ginger' using Tailscale file transfer.
+
+At first, I could not find the test files I had sent earlier. I suspect that there is a time limit for transfers to be completed, but I do not know that for sure. 
+Since they were not important, I created a dedicated folder on Ginger so future Tailscale transfers have a known landing location.
+
+## Lab Goal
+Create a clean directory on Ginger for Tailscale file transfers and successfully retrieve a file sent from my phone.
+
+## Systems Used
+
+| System | Role |
+|---|---|
+| Phone | File sender |
+| Ginger | Kali Linux VM receiving the file |
+| Tailscale | Private mesh VPN / file transfer tool |
+
+## Steps Completed
+1. Created a Tailscale transfer directory
+On Ginger, I created a dedicated folder for Tailscale file transfers.
+
+mkdir -p ~/transfers/tailscale
+
+After sending a student_handbook.pdf from my phone through the Tailscale app, I retrieved it on ginger with:
+
+sudo tailscale file get ~/transfers/tailscale
+
+That tells Tailscale: Take the waiting file transfer and save it into this folder. You do NOT need the filename to do this.
+
+## What I Learned
+Tailscale can transfer files from my phone to a Linux system in my tailnet.
+tailscale file get is used on the receiving machine to download pending files.
+Creating a dedicated transfer directory makes file management much cleaner.
+The dquote> prompt means the shell is waiting for a closing double quote.
+Using sudo may cause downloaded files to be owned by root, so ownership should be checked after the transfer.
+
+## Security+ Connection
+
+This lab connects to several Security+ concepts:
+
+Concept	Connection
+Secure remote access: Tailscale provides private network access between trusted devices
+Least privilege	File ownership should be checked after using sudo
+Asset management: Knowing where transferred files land improves system organization
+Operational security: Dedicated transfer folders reduce confusion and accidental file loss
+Troubleshooting	Recognizing shell prompts like dquote> helps diagnose command-line errors
