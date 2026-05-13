@@ -1,0 +1,144 @@
+##Hank Storage SMB Share + Permissions Fix
+
+#Overview
+Configured /mnt/storage 4TB SATA HDD in Proxmox so it can be used as shared storage from Linux Mint over SMB Samba
+
+The goal was to stop relying on CLI file movement directly on Proxmox and make storage usable 
+through the Mint file manager for normal drag-and-drop transfers, media access, screenshots, 
+lab files, ISOs, and backups.
+
+#Problem
+the storage drive was mounted and usable for the command line, but most folders were owned by root:root 
+with standard 755 permissions.
+
+Example before fix
+drwxr-xr-x root root /mnt/storage/media
+drwxr-xr-x root root /mnt/storage/iso
+drwxr-xr-x root root /mnt/storage/lab-files
+
+This meant root could write to the folders, but normal SMB users could not reliably create, move, or manage files 
+from another machine.
+
+One folder also had odd ownership:
+drwxrwxr-x 2 775 user /mnt/storage/transfers
+
+That showed a numeric UID as the owner, which was messy and needed cleanup.
+Existing Folder Structure
+The folders already existed inside /mnt/storage:
+dump
+iso
+lab-files
+lost+found
+media
+screenshots
+snippets
+template
+transfers
+vm-backups
+
+I did not recreate the folders. I fixed permissions on the existing structure.
+
+##Permission Strategy
+Created a shared group:
+groupadd -f storage
+Changed the storage directory and most subfolders to use:
+root:userstorage
+Set directories to use group inheritance:
+chmod 2775
+
+The important part is the 2 in 2775, which sets the setgid bit. 
+That makes new files and folders inherit the userstorage group.
+Final folder permissions looked like this:
+drwxrwsr-x+ root storage /mnt/user-storage
+drwxrwsr-x+ root storage /mnt/user-storage/media
+drwxrwsr-x+ root storage /mnt/user-storage/iso
+drwxrwsr-x+ root storage /mnt/user-storage/lab-files
+drwxrwsr-x+ root storage /mnt/user-storage/transfers
+
+The + shows ACLs are active.
+lost+found was left mostly alone because it belongs to the filesystem itself:
+drwxrwx---+ root root /mnt/storage/lost+found
+
+##ACL Fix
+Installed ACL support and added default permissions so new files should remain group-writable:
+apt install -y acl
+setfacl -R -m g:storage:rwx /mnt/storage
+setfacl -R -d -m g:storage:rwx /mnt/storage
+
+This helps prevent future permission problems when files are copied in from different machines.
+
+Samba Configuration
+Originally, Samba only shared the transfers folder:
+[user-transfers]
+    path = /mnt/user-storage/transfers
+    browsable = yes
+    read only = no
+    valid users = user
+    create mask = 0664
+    directory mask = 0775
+Added a new full-storage share:
+[userStorage]
+    path = /mnt/user-storage
+    browseable = yes
+    read only = no
+    valid users = user
+    force group = storage
+    create mask = 0664
+    directory mask = 0775
+    force directory mode = 2775
+    inherit permissions = yes
+    inherit acls = yes
+Also updated the existing transfer share to use the same group behavior:
+[user-transfers]
+    path = /mnt/user-storage/transfers
+    browseable = yes
+    read only = no
+    valid users = user
+    force group = userstorage
+    create mask = 0664
+    directory mask = 0775
+    force directory mode = 2775
+    inherit permissions = yes
+    inherit acls = yes
+Checked the Samba config with:
+testparm
+
+Samba loaded the config successfully.
+Restarted Samba:
+systemctl restart smbd
+  
+Shares Created
+Two useful SMB shares are now available:
+userStorage     = full shared storage drive
+user-transfers  = quick transfer/drop folder
+
+Client Connection
+From Linux Mint, connected to:
+smb:/IP/Storage
+
+Final Status
+Drive mounted:              /mnt/user-storage
+Permissions fixed:          yes
+Shared group:               storage
+ACLs enabled:                yes
+Samba configured:            yes
+Full storage share:          Storage
+Transfer-only share:         user-transfers
+Mint drag-and-drop working:  yes
+
+Lesson Learned
+Linux storage permissions matter a lot once a drive becomes shared storage. 
+A folder can be mounted correctly and still be annoying to use if everything is owned by root:root.
+
+The clean solution was not chmod 777. The better setup was:
+shared group + setgid directories + ACL defaults + Samba force group
+That keeps the share usable while avoiding permission chaos.
+
+Next Steps
+Take a screenshot of the Mint file manager connected to HankStorage.
+
+Possible future improvements:
+Add Pi-hole local DNS entry 
+Create separate Samba shares for media or backups if needed
+Point Jellyfin directly at /mnt/storage
+Add a backup plan for important files
