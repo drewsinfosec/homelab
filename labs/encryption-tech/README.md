@@ -80,7 +80,7 @@ Add screenshot:
 
 * `sha256sum message.txt message2.txt`
 
-Suggested caption:
+<img width="1189" height="419" alt="hash-example" src="https://github.com/user-attachments/assets/3fc06b78-a626-41f2-a72b-b7f39c24790e" />
 
 > A small change in the file created a completely different SHA-256 hash, showing how hashes can be used to detect changes.
 
@@ -141,13 +141,7 @@ The encrypted file can be sent openly, but the passphrase should be shared throu
 
 Add screenshots:
 
-* `gpg -c message.txt`
-* `ls -l`
-* `cat message.txt.gpg`
-* `gpg -o decrypted-message.txt -d message.txt.gpg`
-* `cat decrypted-message.txt`
-
-Suggested caption:
+<img width="1156" height="669" alt="symmestric-encryption-examples" src="https://github.com/user-attachments/assets/57d114ab-0f41-48f4-993f-0fa724d599be" />
 
 > GPG created an encrypted `.gpg` file using a passphrase. The file could only be decrypted after entering the correct passphrase.
 
@@ -216,14 +210,8 @@ A person can share their public key openly. Others can use that public key to en
 
 ## Screenshot Evidence
 
-Add screenshots:
+<img width="560" height="305" alt="gpg-supported-algorithms" src="https://github.com/user-attachments/assets/5a887210-1bfb-4aad-87fc-ba0d4c4d9f8e" />
 
-* The original GPG recipient error
-* `gpg --list-keys`
-* Successful encryption after creating or selecting the correct key
-* Successful decryption
-
-Suggested caption:
 
 > GPG could not encrypt to the recipient until a matching public key was available in the local keyring.
 
@@ -278,12 +266,8 @@ A valid signature shows that the file has not changed since it was signed and th
 
 ## Screenshot Evidence
 
-Add screenshots:
+<img width="1018" height="411" alt="digital-signatures" src="https://github.com/user-attachments/assets/bc1ad216-2257-4f63-a06a-23d4ead4fb7d" />
 
-* Successful signature verification
-* Failed verification after tampering
-
-Suggested caption:
 
 > After the file was modified, the original digital signature no longer verified successfully.
 
@@ -380,27 +364,10 @@ Important certificate fields include:
 
 This lab showed that TLS depends on DNS. A client cannot inspect a certificate if it cannot first resolve the hostname and connect to the server.
 
-The troubleshooting path was:
-
-```text
-OpenSSL error
-→ Check command syntax
-→ Check DNS resolution
-→ Identify missing DNS address record
-→ Confirm no website had been configured for the domain
-→ Test OpenSSL against known working HTTPS sites
-```
-
 ## Screenshot Evidence
 
-Add screenshots:
-
-1. Failed OpenSSL command against `drewsinfosec.com`
-2. `resolvectl query drewsinfosec.com`
-3. Successful OpenSSL certificate inspection against `google.com`
-4. Successful OpenSSL certificate inspection against `cloudflare.com`
-
-Suggested caption:
+<img width="1322" height="113" alt="successful-TLS-inspection" src="https://github.com/user-attachments/assets/e66bb727-8c59-47ba-b103-966ed7cce29c" />
+<img width="1324" height="105" alt="successful-cloudflare-TLS-inspection" src="https://github.com/user-attachments/assets/8b1b3613-4291-4d63-9de4-68c56d91997c" />
 
 > TLS inspection failed for `drewsinfosec.com` because the domain had not yet been pointed to a web server. 
 A successful test against other HTTPS sites confirmed that OpenSSL was working correctly.
